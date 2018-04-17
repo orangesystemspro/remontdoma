@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -16,9 +17,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         final View logo = findViewById(R.id.logo);
         final WebView web = findViewById(R.id.web);
         web.setVisibility(GONE);
+        web.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
