@@ -12,6 +12,7 @@ import static android.view.View.VISIBLE;
 
 public class MainActivity extends AppCompatActivity {
     private static final int DELAY = 3000;
+    private WebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         final View logo = findViewById(R.id.logo);
-        final WebView web = findViewById(R.id.web);
+        web = findViewById(R.id.web);
         web.setVisibility(GONE);
         web.setWebViewClient(new WebViewClient() {
 
@@ -38,5 +39,15 @@ public class MainActivity extends AppCompatActivity {
                 web.loadUrl("https://remontdoma24.ru/");
             }
         }, DELAY);
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (web.canGoBack()) {
+            web.goBack();
+        }else {
+            //super.onBackPressed();
+        }
     }
 }
